@@ -28,8 +28,25 @@ namespace Zelda
 
         void Update()
         {
+            CheckInteract();
             HandleMovement();
             UpdateAnimator();
+        }
+
+        void CheckInteract()
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2.0f);
+
+            // 각 콜라이더를 검사하여 상호작용 가능한 오브젝트와 상호작용
+            foreach (Collider collider in hitColliders)
+            {
+                IInteractable interactable = collider.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    Debug.Log(collider.gameObject.name + " 상호작용");
+                    interactable.Interact();
+                }
+            }
         }
 
         void HandleMovement()
