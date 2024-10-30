@@ -28,10 +28,13 @@ namespace ProtoWorld
         List<IInteractable> interactableObjects = new List<IInteractable>();
         IInteractable currentInteractObject;
 
+        private Inventory inventory;
+        public Inventory Inventory => inventory;
 
         void Awake() {
             controller = GetComponent<CharacterController>();
             path = new NavMeshPath();
+            inventory = new Inventory();
             // GetComponents<CharacterController>();
             //GetComponentInChildren<>(); //하위 Object의 해당 컴포넌트가 있는 자식 하나만 반환
             //GetComponentsInChildren<CharacterController>().ToList();//하위 Object의 해당 컴포넌트가 있는 자식 모두 반환 
@@ -40,11 +43,26 @@ namespace ProtoWorld
 
         void Update()
         {
+            UIInteractionCheck();
             CheckInteract();
             HandleMovement(); //이동, 방향전환 처리
             UpdateAnimator(); //애니메이션 처리
         }
 
+
+        void UIInteractionCheck()
+        {
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                var inventoryWindow = UIManager.inst.GetWindow<InventoryWindow>();
+                inventoryWindow.Toggle();
+                if(inventoryWindow.IsOpen)
+                {
+                    inventoryWindow.SetInventory(inventory);
+                    inventoryWindow.UpdateInventory(inventory);
+                }
+            }
+        }
 
         //상호 작용 가능한 오브젝트 탐색
         //상호 작용할 예정인 오브젝트가 있고, 그녀석과 상호 작용 가능한 거리에 있을 경우, interact ghcnf
@@ -54,7 +72,7 @@ namespace ProtoWorld
             {
                 if (currentInteractObject.CanInteract(transform.position))
                 {
-                    currentInteractObject.Interact();
+                    currentInteractObject.Interact(this);
                     currentInteractObject = null;
                     return;
                 }
@@ -86,7 +104,7 @@ namespace ProtoWorld
                     currentInteractObject = interactObject;
                     if (interactObject.CanInteract(position)) //상호작용 가능한 거리면 바로 상호작용
                     {
-                        interactObject.Interact();
+                        interactObject.Interact(this);
                         currentInteractObject = null;
                     }
                     else //상호작용 가능한 거리가 아니면 이동 경로 계산함 

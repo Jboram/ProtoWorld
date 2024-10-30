@@ -18,7 +18,7 @@ namespace ProtoWorld
         public InteractableType Type => type;
         protected float interactionDistance = 2f;
         public abstract string GetInteractionText();
-        public abstract void Interact();
+        public abstract void Interact(PlayerController playerController);
 
 
         // 상호작용 조건을 확인하는 메서드

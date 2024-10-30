@@ -368,6 +368,16 @@
 "Assets/Script/Interaction/Collectible.cs"
 "Assets/Script/Interaction/IInteractable.cs"
 "Assets/Script/Interaction/ItemPickup.cs"
+"Assets/Script/Inventory/Inventory.cs"
+"Assets/Script/Item/Consumable/BeverageData.cs"
+"Assets/Script/Item/Consumable/ConsumableData.cs"
+"Assets/Script/Item/Consumable/FoodData.cs"
+"Assets/Script/Item/Equipment/ArmorData.cs"
+"Assets/Script/Item/Equipment/EquipmentData.cs"
+"Assets/Script/Item/Equipment/WeaponData.cs"
+"Assets/Script/Item/Item.cs"
+"Assets/Script/Item/ItemData.cs"
+"Assets/Script/Item/Misc/MiscData.cs"
 "Assets/Script/Manager/SingletonBase.cs"
 "Assets/Script/Manager/SingletonMonoBehaviour.cs"
 "Assets/Script/Manager/UIManager.cs"
@@ -377,6 +387,8 @@
 "Assets/Script/UI/UIBase/CanvasBase.cs"
 "Assets/Script/UI/UIBase/HudBase.cs"
 "Assets/Script/UI/UIBase/WindowBase.cs"
+"Assets/Script/UI/Window/InvenSlotUI.cs"
+"Assets/Script/UI/Window/InventoryWindow.cs"
 -langversion:9.0
 /deterministic
 /optimize+

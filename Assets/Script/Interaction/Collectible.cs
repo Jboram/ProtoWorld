@@ -7,20 +7,22 @@ namespace ProtoWorld
 {
     public class Collectible : IInteractable
     {
-        public string itemName = "채집물";
+        [SerializeField] private ItemData itemData;
+        [SerializeField] private int amount;
+
         public override string GetInteractionText()
         {
             return "채집하기";
         }
 
-        public override void Interact()
+        public override void Interact(PlayerController playerController)
         {
+            playerController.Inventory.Add(itemData, amount);
             Collect();
         }
 
         private void Collect()
         {
-            Debug.Log(itemName + " 아이템을 획득.");
             Destroy(gameObject);
         }
     }
