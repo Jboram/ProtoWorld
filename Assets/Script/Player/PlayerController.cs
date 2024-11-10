@@ -32,6 +32,7 @@ namespace ProtoWorld
         public Inventory Inventory => inventory;
 
         void Awake() {
+            PlayerService.inst.AddPlayerController(this);
             controller = GetComponent<CharacterController>();
             path = new NavMeshPath();
             inventory = new Inventory();
@@ -59,7 +60,14 @@ namespace ProtoWorld
                 if(inventoryWindow.IsOpen)
                 {
                     inventoryWindow.SetInventory(inventory);
-                    inventoryWindow.UpdateInventory(inventory);
+                }
+                else
+                {
+                    var craftWindow = UIManager.inst.GetWindow<CraftWindow>();
+                    if (craftWindow.IsOpen)
+                    {
+                        craftWindow.Hide();
+                    }
                 }
             }
         }

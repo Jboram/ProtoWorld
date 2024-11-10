@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c153ef7c85d4e49be8ef001f886762, type: 3}
+  m_Name: Material07
+  m_EditorClassIdentifier: 
+  code: 400008
+  itemType: 2
+  itemName: shit
+  itemDesc: 
+  maxStackSize: 1
+  icon: {fileID: 21300000, guid: 35fad5776da144026852ccb77de6f9ed, type: 3}
+  miscType: 0

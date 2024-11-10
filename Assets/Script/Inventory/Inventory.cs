@@ -9,6 +9,7 @@ namespace ProtoWorld
         public Item[] Items => items;
         public int Length => items.Length;
         public readonly int MaxCount = 24;
+        private int itemCount = 0;
 
         public event Action<Inventory> OnInventoryUpdated;
 
@@ -26,6 +27,7 @@ namespace ProtoWorld
                 if (index != -1)
                 {
                     items[index] = new Item(itemData, amount);
+                    itemCount++;
                 }
                 else
                 {
@@ -51,7 +53,12 @@ namespace ProtoWorld
             item.Add(-amount);
             if (item.Empty())
             {
-                items[index] = null;
+                 for (int i = index; i < itemCount - 1; i++)
+                {
+                    items[i] = items[i + 1];
+                }
+                items[itemCount - 1] = null;
+                itemCount--;
             }
 
             OnInventoryUpdated?.Invoke(this);

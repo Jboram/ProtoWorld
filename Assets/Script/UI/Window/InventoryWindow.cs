@@ -22,14 +22,18 @@ namespace ProtoWorld
         protected override void OnHide()
         {
             base.OnHide();
-            inventory.OnInventoryUpdated -= UpdateInventory;
-            inventory = null;
+            if(inventory != null)
+            {
+                inventory.OnInventoryUpdated -= UpdateInventory;
+                inventory = null;
+            }
         }
 
         public void SetInventory(Inventory inventory)
         {
             this.inventory = inventory;
             inventory.OnInventoryUpdated += UpdateInventory;
+            UpdateInventory(inventory);
         }
 
         public void UpdateInventory(Inventory inventory)

@@ -18,5 +18,18 @@ namespace ProtoWorld
         public string itemDesc;
         public int maxStackSize = 1;
         public Sprite icon;
+
+        public override bool Equals(object obj)
+        {
+            if (obj is ItemData itemData)
+            {
+                return code == itemData.code;
+            }
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return code.GetHashCode();
+        }
     }
 }

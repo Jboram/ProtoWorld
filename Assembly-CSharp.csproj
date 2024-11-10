@@ -64,17 +64,23 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.46f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Script/UI/Window/CraftWindow.cs" />
     <Compile Include="Assets/Script/Item/Consumable/BeverageData.cs" />
     <Compile Include="Assets/Script/Item/Equipment/EquipmentData.cs" />
     <Compile Include="Assets/Script/Inventory/Inventory.cs" />
+    <Compile Include="Assets/Script/UI/Slots/CraftSlotUI.cs" />
+    <Compile Include="Assets/Script/UI/Slots/InvenSlotUI.cs" />
     <Compile Include="Assets/Script/Item/Consumable/ConsumableData.cs" />
+    <Compile Include="Assets/Script/Recipe/Recipe.cs" />
     <Compile Include="Assets/Script/Interaction/IInteractable.cs" />
-    <Compile Include="Assets/Script/UI/Window/InvenSlotUI.cs" />
     <Compile Include="Assets/Script/Manager/UIManager.cs" />
     <Compile Include="Assets/Script/UI/UIBase/BaseUI.cs" />
     <Compile Include="Assets/Script/Item/Equipment/ArmorData.cs" />
+    <Compile Include="Assets/Script/Manager/CraftManager.cs" />
     <Compile Include="Assets/Script/Item/ItemData.cs" />
+    <Compile Include="Assets/Script/Interaction/CraftObject.cs" />
     <Compile Include="Assets/Script/UI/UIBase/HudBase.cs" />
+    <Compile Include="Assets/Script/Player/PlayerService.cs" />
     <Compile Include="Assets/Script/Manager/SingletonBase.cs" />
     <Compile Include="Assets/Script/Player/PlayerController.cs" />
     <Compile Include="Assets/Script/Interaction/ItemPickup.cs" />
@@ -87,6 +93,7 @@
     <Compile Include="Assets/Script/Item/Equipment/WeaponData.cs" />
     <Compile Include="Assets/Script/UI/UIBase/CanvasBase.cs" />
     <Compile Include="Assets/Script/Item/Item.cs" />
+    <Compile Include="Assets/Script/Manager/GameUtil.cs" />
     <Compile Include="Assets/Script/UI/UIBase/WindowBase.cs" />
   </ItemGroup>
   <ItemGroup>
