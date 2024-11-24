@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 namespace ProtoWorld 
@@ -20,7 +21,8 @@ namespace ProtoWorld
         float velocity;
         const float ZeroF = 0f;
 
-        static readonly int Speed = Animator.StringToHash("Speed");
+        static readonly int SpeedHash = Animator.StringToHash("Speed");
+        static readonly int AttackHash = Animator.StringToHash("Attack");
 
         private int currentCornerIndex = 0;
         private NavMeshPath path;
@@ -53,6 +55,13 @@ namespace ProtoWorld
 
         void UIInteractionCheck()
         {
+            if (Input.GetMouseButtonDown(0)) //0: 좌클릭 
+            {
+                if (EventSystem.current.IsPointerOverGameObject() == false) //UI를 클릭중이지 않으면 
+                {
+                    Attack();
+                }
+            }
             if (Input.GetKeyDown(KeyCode.I))
             {
                 var inventoryWindow = UIManager.inst.GetWindow<InventoryWindow>();
@@ -214,7 +223,12 @@ namespace ProtoWorld
 
         void UpdateAnimator()
         {
-            animator.SetFloat(Speed, currentSpeed / moveSpeed); //현재 속도/최대속도 비율 
+            animator.SetFloat(SpeedHash, currentSpeed / moveSpeed); //현재 속도/최대속도 비율 
+        }
+
+        void Attack()
+        {
+            animator.SetTrigger(AttackHash);
         }
 
         private void OnDrawGizmos()

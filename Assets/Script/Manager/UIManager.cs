@@ -31,9 +31,13 @@ namespace ProtoWorld
                     Type type = baseComponent.GetType();
                     if (!hudDictionary.ContainsKey(type))
                     {
-                        GameObject hud = Instantiate(hudPrefab);
+                        GameObject hud = GameObject.Find(hudPrefab.name);
+                        if (hud == null)
+                        {
+                            hud = Instantiate(hudPrefab);
+                            hud.SetActive(false);
+                        }
                         var instanceComponent = hud.GetComponent<HudBase>();
-                        hud.SetActive(false);
                         hudDictionary.Add(type, instanceComponent);
                     }
                 }
