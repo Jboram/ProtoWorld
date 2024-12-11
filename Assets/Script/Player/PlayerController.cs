@@ -12,6 +12,8 @@ namespace ProtoWorld
     {
         private CharacterController controller;
         [SerializeField] private Animator animator;
+        [SerializeField] private Collider hitCollider;
+        [SerializeField] private AnimationEventHandler animEventHandler;
 
         float moveSpeed = 6f;    // 이동 속도
         float gravity = -9.81f;  // 중력 값
@@ -41,11 +43,19 @@ namespace ProtoWorld
             // GetComponents<CharacterController>();
             //GetComponentInChildren<>(); //하위 Object의 해당 컴포넌트가 있는 자식 하나만 반환
             //GetComponentsInChildren<CharacterController>().ToList();//하위 Object의 해당 컴포넌트가 있는 자식 모두 반환 
+       
+            animEventHandler.RegisterEvent("AttackStart", AttackStart);
+            animEventHandler.RegisterEvent("AttackEnd", AttackEnd);
         }
 
 
         void Update()
         {
+            if (animator.GetCurrentAnimatorStateInfo(0).shortNameHash == AttackHash)
+            {
+                //이동중 공격 불가 처리
+                return;
+            }
             UIInteractionCheck();
             CheckInteract();
             HandleMovement(); //이동, 방향전환 처리
@@ -101,7 +111,7 @@ namespace ProtoWorld
             foreach (Collider collider in hitColliders) //충돌된 오브젝트중에 탐색
             {
                 IInteractable interactable = collider.GetComponent<IInteractable>(); 
-                if (interactable != null)
+                if (interactable != null && interactable.enabled)
                 {
                     interactableObjects.Add(interactable); //IInteractable이 있는 오브젝트만 리스트에 추가
                 }
@@ -231,6 +241,15 @@ namespace ProtoWorld
             animator.SetTrigger(AttackHash);
         }
 
+        void AttackStart()
+        {
+            hitCollider.enabled = true;
+        }
+
+        void AttackEnd()
+        {
+            hitCollider.enabled = false;
+        }
         private void OnDrawGizmos()
         {
             if (path != null)

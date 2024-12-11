@@ -10,6 +10,10 @@ namespace ProtoWorld
         [SerializeField] private Animator animator;
         private PlayerDetector playerDetector;
 
+        private Health health;
+        [SerializeField] Collider hitCollider;
+        [SerializeField] private AnimationEventHandler animEventHandler;
+
         // Data
         private Vector3 startPoint; //처음 시작 위치 
         private float wanderRadius = 10.0f; //배회할 영역의 범위
@@ -19,6 +23,7 @@ namespace ProtoWorld
         private bool isInBattle;
         private bool isDetectPlayer;
         private bool canAttackPlayer;
+        private bool isDead;
 
         private static readonly int IsMoveHash = Animator.StringToHash("IsMove");
         private static readonly int IsInBattleHash = Animator.StringToHash("IsInBattle");
@@ -28,7 +33,7 @@ namespace ProtoWorld
         //private static readonly int IdleBattleHash = Animator.StringToHash("IdleBattle");
         //private static readonly int RunHash = Animator.StringToHash("RunFWD");
         private static readonly int AttackHash = Animator.StringToHash("Attack");
-        //private static readonly int DieHash = Animator.StringToHash("Die");
+        private static readonly int DieHash = Animator.StringToHash("Die");
 
         private CountdownTimer idleTimer;
         private CountdownTimer attackTimer;
@@ -44,6 +49,12 @@ namespace ProtoWorld
             attackTimer = new CountdownTimer(timeBetweenAttacks);
 
             idleTimer.Start();
+
+            health = GetComponent<Health>();
+            health.OnDeadEvent += OnDead;
+
+            animEventHandler.RegisterEvent("AttackStart", AttackStart);
+            animEventHandler.RegisterEvent("AttackEnd", AttackEnd);
         }
 
         private void OnStopIdle()
@@ -56,7 +67,16 @@ namespace ProtoWorld
 
         // Update is called once per frame
         void Update()
-        {
+        { 
+            if (isDead)
+            {
+                var animState = animator.GetCurrentAnimatorStateInfo(0);
+                if(animState.IsName("Die") && 0.95f < animState.normalizedTime)
+                {
+                    Destroy(gameObject);
+                }   
+                return;
+            }
             CheckState();
             idleTimer.Tick(Time.deltaTime);
             attackTimer.Tick(Time.deltaTime);
@@ -136,6 +156,23 @@ namespace ProtoWorld
             var playerController = PlayerService.inst.Controller;
             agent.SetDestination(playerController.transform.position);
             isMove = true;
+        }
+
+        private void OnDead()
+        {
+            isDead = true;
+            animator.SetBool(DieHash, isDead);
+            hitCollider.enabled = false;
+        }
+
+        void AttackStart()
+        {
+            hitCollider.enabled = true;
+        }
+
+        void AttackEnd()
+        {
+            hitCollider.enabled = false;
         }
     }
 
