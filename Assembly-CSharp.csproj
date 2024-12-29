@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Assets/Script/UI/Window/CraftWindow.cs" />
     <Compile Include="Assets/Script/Strategy/Detection/IDetectionStrategy.cs" />
+    <Compile Include="Assets/Script/Dialogue/DialogueData.cs" />
     <Compile Include="Assets/Script/Item/Consumable/BeverageData.cs" />
     <Compile Include="Assets/Script/Item/Equipment/EquipmentData.cs" />
     <Compile Include="Assets/Script/Inventory/Inventory.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Assets/Script/UI/Hud/Health.cs" />
     <Compile Include="Assets/Script/Interaction/IInteractable.cs" />
     <Compile Include="Assets/Script/UI/Hud/Billboard.cs" />
+    <Compile Include="Assets/Script/UI/Window/DialogueWindow.cs" />
     <Compile Include="Assets/Script/Manager/UIManager.cs" />
     <Compile Include="Assets/Script/Animation/AnimationEventHandler.cs" />
     <Compile Include="Assets/Script/UI/UIBase/BaseUI.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Assets/Script/Interaction/ItemPickup.cs" />
     <Compile Include="Assets/Script/Manager/SingletonMonoBehaviour.cs" />
     <Compile Include="Assets/Script/UI/Window/InventoryWindow.cs" />
+    <Compile Include="Assets/Script/Interaction/DialogueInteraction.cs" />
     <Compile Include="Assets/Script/Item/Misc/MiscData.cs" />
     <Compile Include="Assets/Script/Interaction/Collectible.cs" />
     <Compile Include="Assets/Script/Item/Consumable/FoodData.cs" />
