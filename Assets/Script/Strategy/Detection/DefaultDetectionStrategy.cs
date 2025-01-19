@@ -7,16 +7,35 @@ namespace ProtoWorld
         readonly float detectionAngle;
         readonly float detectionRadius;
         readonly float halfRadius;
+        readonly Transform baseTransform;
+        readonly float baseRadius;
 
-        public DefaultDetectionStrategy(float detectionAngle, float detectionRadius)
+        public DefaultDetectionStrategy(float detectionAngle, float detectionRadius, Transform baseTransform, float baseRadius)
         {
             this.detectionAngle = detectionAngle;
             this.detectionRadius = detectionRadius;
             halfRadius = detectionRadius / 2.0f;
+            this.baseTransform = baseTransform;
+            this.baseRadius = baseRadius;
         }
 
         public bool Execute(Transform target, Transform detector) //detector=몬스터, target= player
         {
+            if (baseTransform != null)
+            {
+                float targetDistanceFromBase = (baseTransform.position - target.position).magnitude;
+                if (targetDistanceFromBase < baseRadius) // 기준 위치 범위 안에 들어온 경우
+                {
+                    return true;
+                }
+
+                float detectorDistanceFromBase = (baseTransform.position - detector.position).magnitude;
+                if (detectionRadius < detectorDistanceFromBase)
+                {
+                    return false;
+                }
+            }
+
             var directionToPlayer = target.position - detector.position; //플레이어에 대한 방향, 거리 
             var angleToPlayer = Vector3.Angle(directionToPlayer, detector.forward);//두 벡터의 각도
 

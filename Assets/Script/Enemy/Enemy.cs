@@ -42,7 +42,8 @@ namespace ProtoWorld
         {
             agent = GetComponent<NavMeshAgent>();
             playerDetector = GetComponent<PlayerDetector>();
-            startPoint = transform.position;
+            var detectorBaseTransform = playerDetector.GetBaseTransform();
+            startPoint = detectorBaseTransform == null ? transform.position : detectorBaseTransform.position;
 
             idleTimer = new CountdownTimer(5.0f);
             idleTimer.OnTimerStop += OnStopIdle;
