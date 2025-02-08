@@ -14,6 +14,7 @@ namespace ProtoWorld
         [SerializeField] private Animator animator;
         [SerializeField] private Collider hitCollider;
         [SerializeField] private AnimationEventHandler animEventHandler;
+        public LayerMask groundLayer;
 
         float moveSpeed = 6f;    // 이동 속도
         float gravity = -9.81f;  // 중력 값
@@ -65,11 +66,32 @@ namespace ProtoWorld
 
         void UIInteractionCheck()
         {
-            if (Input.GetMouseButtonDown(0)) //0: 좌클릭 
+             if (EventSystem.current.IsPointerOverGameObject() == false) //UI를 클릭중이지 않으면 
             {
-                if (EventSystem.current.IsPointerOverGameObject() == false) //UI를 클릭중이지 않으면 
+                if (Input.GetMouseButtonDown(1)) // 우클릭 감지
                 {
-                    Attack();
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);//Ray :현재 위치로 부터의 방향
+                    RaycastHit hit;
+
+                    if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer)) // "Ground" 레이어만 감지
+                    {//Raycast :layer mask를 감지하여 얼만큼 ray를 쏴서 맞춘 위치 (hit)
+                        if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, 5.0f, NavMesh.AllAreas))
+                        {//samplePosition 이동하려는 위치에서 일정 반경 내에 이동가능 위치를 찾음
+                            path.ClearCorners();
+                            currentCornerIndex = 0;
+                            if (NavMesh.CalculatePath(transform.position, navHit.position, NavMesh.AllAreas, path))
+                            {//이동할 경로 계산                        
+                                
+                            }
+                        }
+                    }
+                }
+                else if (Input.GetMouseButtonDown(0)) //0: 좌클릭 
+                {
+                    if (EventSystem.current.IsPointerOverGameObject() == false) //UI를 클릭중이지 않으면 
+                    {
+                        Attack();
+                    }
                 }
             }
             if (Input.GetKeyDown(KeyCode.I))

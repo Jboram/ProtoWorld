@@ -87,7 +87,11 @@ namespace ProtoWorld
         private void UpdateAnimState() //설정한 parameter에 따라 애니메이션 상태 업데이트
         {
             animator.SetBool(IsMoveHash, isMove);
-            animator.SetBool(IsInBattleHash, isInBattle);
+            // animator.SetBool(IsInBattleHash, isInBattle);
+            if (animator.HasParameter(IsInBattleHash))
+            {
+                animator.SetBool(IsInBattleHash, isInBattle);
+            }
         }
 
         private void CheckState()

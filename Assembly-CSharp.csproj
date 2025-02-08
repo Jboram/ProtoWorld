@@ -82,11 +82,13 @@
     <Compile Include="Assets/Script/Recipe/Recipe.cs" />
     <Compile Include="Assets/Script/UI/Hud/Health.cs" />
     <Compile Include="Assets/Script/Interaction/IInteractable.cs" />
+    <Compile Include="Assets/Script/Animation/AnimationExtension.cs" />
     <Compile Include="Assets/Script/UI/Hud/Billboard.cs" />
     <Compile Include="Assets/Script/UI/Window/DialogueWindow.cs" />
     <Compile Include="Assets/Script/Manager/UIManager.cs" />
     <Compile Include="Assets/Script/Animation/AnimationEventHandler.cs" />
     <Compile Include="Assets/Script/UI/UIBase/BaseUI.cs" />
+    <Compile Include="Assets/Script/UI/Overlay/TargetMarkOverlay.cs" />
     <Compile Include="Assets/Script/Item/Equipment/ArmorData.cs" />
     <Compile Include="Assets/Script/Manager/CraftManager.cs" />
     <Compile Include="Assets/Script/Enemy/PlayerDetection.cs" />
